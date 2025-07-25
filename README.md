@@ -5,7 +5,7 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 1. Make sure your GCP project is registered and supports AgentSpace. To verfiy, you should have the possibility of creating an Agentspace AI Application in GCP
 
-![](imgs/0.png)
+![](imgs/img0.png)
 
 
 
@@ -32,13 +32,13 @@ python deploy.py
 
 4. Create a new `Agentspace` AI Application in the GCP console:
 
-![](imgs/1.png)
+![](imgs/img1.png)
 
 5. Under `Configurations` => `Assitant`, add a new Agents item at the bottom of the page. Paste the previously copied `Resource Name` in the `Agent` field. Provide a display name and a short sentence for Instructions. Save and publish when done:
 
-![](imgs/2.png)
+![](imgs/img2.png)
 
 6. Under integration, copy the link to your web app, and open it in a new tab.
 
 7. Click on your new Agent on the left panel, and provide a date:
-![](imgs/3.png)
+![](imgs/img3.png)
