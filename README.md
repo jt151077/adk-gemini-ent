@@ -38,7 +38,7 @@ python deploy.py
 
 ![](imgs/img2.png)
 
-6. Under integration, copy the link to your web app, and open it in a new tab.
+6. Under the left-hand side panel, click on `Integration`, copy the link to your web app, and open it in a new tab.
 
 7. Click on your new Agent on the left panel, and provide a date:
 ![](imgs/img3.png)
