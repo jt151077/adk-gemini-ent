@@ -1,6 +1,13 @@
 # adk-agentspace
 Simple example of a custom Agent developed with ADK and published in AgentSpace
 
+
+## Pre-requisite
+
+1. This example is meant to work with `python >= 3.12`
+2. Check out this repository somewhere where you have a terminal access `git clone <THIS_REPOSITORY_URL>`
+
+
 ## Setup
 
 1. Make sure your GCP project is registered and supports AgentSpace. To verfiy, you should have the possibility of creating an Agentspace AI Application in GCP
