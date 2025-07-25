@@ -5,7 +5,7 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 ## Pre-requisite
 
 1. This example is meant to work with `python >= 3.12`
-2. Check out this repository somewhere where you have a terminal access `git clone <THIS_REPOSITORY_URL>`
+2. Check out this repository somewhere where you have a terminal access `git clone git@github.com:jt151077/adk-agentspace.git`
 
 
 ## Setup
