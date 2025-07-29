@@ -2,7 +2,6 @@ import os
 import vertexai
 from vertexai import agent_engines
 from dotenv import load_dotenv
-import pprint
 
 load_dotenv()
 
@@ -22,5 +21,5 @@ remote_app = agent_engines.create(
     requirements=[
         "google-cloud-aiplatform[adk,agent_engines]"
     ],
-    extra_packages = ["agent.py"]
+    extra_packages = ["agent.py", "tools.py"]
 )
