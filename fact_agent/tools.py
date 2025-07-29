@@ -22,6 +22,8 @@ async def generate_image_data(tool_context: ToolContext, fact: str) -> dict:
 
         if not project or not location:
             raise ValueError("GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION must be set in the environment.")
+        
+        vertexai.init(project=project, location=location)
         model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
 
         images = model.generate_images(
