@@ -1,0 +1,14 @@
+[project]
+name = "fact_agent"
+version = "0.1.0"
+description = "ADK Agent which produces a fact from a given year and an image based on that fact"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-adk>=1.8.0",
+    "google-cloud-aiplatform[adk,agent-engines]>=1.105.0",
+    "python-dotenv>=1.1.1",
+]
+
+[tool.setuptools]
+packages = ["fact_agent"]

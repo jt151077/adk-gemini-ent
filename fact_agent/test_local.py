@@ -1,7 +1,13 @@
 import asyncio
-from agent import app
+from fact_agent.agent import root_agent
+from vertexai.preview.reasoning_engines import AdkApp
 
 async def main():
+
+    app = AdkApp(
+        agent=root_agent,
+        enable_tracing=True
+    )
 
     session = app.create_session(user_id="ysian")
     app.list_sessions(user_id="ysian")

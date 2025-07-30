@@ -5,8 +5,9 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 ## Pre-requisite
 
 1. This example is meant to work with `python >= 3.12`
-2. Check out this repository somewhere where you have a terminal access `git clone git@github.com:jt151077/adk-agentspace.git`
-3. For this example you need a GCP Project, as the artifacts will be deployed in Agent Engine, and the AgentSpace provisioned in AI Applications 
+2. Install the `UV` Python package manager from https://github.com/astral-sh/uv
+3. Check out this repository somewhere where you have a terminal access `git clone git@github.com:jt151077/adk-agentspace.git`
+4. For this example you need a GCP Project, as the artifacts will be deployed in Agent Engine, and the AgentSpace provisioned in AI Applications 
 
 
 ## Setup
@@ -19,14 +20,13 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 ## Install
 
-1. Under the `fact_agent` subfolder, provide the correct `GOOGLE_CLOUD_PROJECT` in the `.env` file.
+1. CD to the root of the project `adk-agentspace`, provide the correct `GOOGLE_CLOUD_PROJECT` in the `.env` file.
 2. At the root folder, execute the following commands:
 
 ```shell
-python -m venv .venv
+uv venv
 source .venv/bin/activate
-pip install google-cloud-aiplatform google-auth
-pip install --upgrade --quiet google-cloud-aiplatform[agent_engines,adk]
+uv pip install -e .
 ```
 
 3. To test the code, you can use the graphical tool for ADK by launching:
@@ -42,11 +42,11 @@ This will start a webserver running on http://127.0.0.1:8000. By pointing your w
 ![](imgs/img5.png)
 
 
-4. Under the `fact_agent` subfolder, execute the following commands:
+4. You can also test the Agent from the command line and/or deploy it via the following commands:
 
 ```shell
-python test_local.py
-python deploy.py
+uv run fact_agent/test_local.py
+uv run deployment/deploy.py
 ```
 
 > When the deploy script is finished, in the Terminal output, note the Resource Name (in the form): `projects/<PROJECT_NUMBER>/locations/us-central1/reasoningEngines/6540449315872047104`

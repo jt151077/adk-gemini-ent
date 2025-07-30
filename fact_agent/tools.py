@@ -1,3 +1,17 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import io
 import vertexai
 import os
@@ -12,18 +26,19 @@ from vertexai.preview.vision_models import ImageGenerationModel
 
 load_dotenv()
 
+PROJECT_ID=os.getenv("GOOGLE_CLOUD_PROJECT")
+LOCATION=os.getenv("GOOGLE_CLOUD_LOCATION")
+
+
 async def generate_image_data(tool_context: ToolContext, fact: str) -> dict:
     """Generates an image and returns a dict with text and image_bytes."""
     print(f"Tool running: Generating image for '{fact}'...")
     
     try:      
-        project = os.getenv("GOOGLE_CLOUD_PROJECT")
-        location = os.getenv("GOOGLE_CLOUD_LOCATION")
-
-        if not project or not location:
+        if not PROJECT_ID or not LOCATION:
             raise ValueError("GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION must be set in the environment.")
         
-        vertexai.init(project=project, location=location)
+        vertexai.init(project=PROJECT_ID, location=LOCATION)
         model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
 
         images = model.generate_images(

@@ -1,9 +1,23 @@
-import vertexai
-import os
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from google.adk.agents import Agent
-from vertexai.preview.reasoning_engines import AdkApp
-from tools import generate_image_data
+
+# Import the tools
+from .tools import generate_image_data
 from google.adk.tools.load_artifacts_tool import load_artifacts_tool
+
 
 
 root_agent = Agent(
@@ -19,9 +33,4 @@ root_agent = Agent(
       You should not rely on the previous history.
     """,
     tools=[generate_image_data, load_artifacts_tool],
-)
-
-app = AdkApp(
-    agent=root_agent,
-    enable_tracing=True
 )
