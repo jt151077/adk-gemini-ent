@@ -15,43 +15,34 @@
 import io
 import vertexai
 import os
-import google.genai.types as types
+from google import genai
+from google.genai import types
 
-from dotenv import load_dotenv
 from google.adk.tools.tool_context import ToolContext
 from google.genai.types import GenerateContentConfig, Part
 
-from vertexai.preview.vision_models import ImageGenerationModel
-
-
-load_dotenv()
-
-PROJECT_ID=os.getenv("GOOGLE_CLOUD_PROJECT")
-LOCATION=os.getenv("GOOGLE_CLOUD_LOCATION")
+from PIL import Image
+from io import BytesIO
+import base64
 
 
 async def generate_image_data(tool_context: ToolContext, fact: str) -> dict:
-    """Generates an image and returns a dict with text and image_bytes."""
     print(f"Tool running: Generating image for '{fact}'...")
     
     try:      
-        if not PROJECT_ID or not LOCATION:
-            raise ValueError("GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION must be set in the environment.")
-        
-        vertexai.init(project=PROJECT_ID, location=LOCATION)
-        model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
+        client = genai.Client()
 
-        images = model.generate_images(
+        response = client.models.generate_images(
+            model='imagen-3.0-generate-002',
             prompt=f"Generate a single image in futuristic style representing the following fact: {fact}",
-            number_of_images=1,
-            language="en",
-            aspect_ratio="1:1",
-            safety_filter_level="block_some",
-            person_generation="allow_adult",
+            config=types.GenerateImagesConfig(
+                number_of_images=1,
+                include_rai_reason=True,
+                output_mime_type='image/png',
+            )
         )
 
-        image_bytes = images[0]._image_bytes
-
+        image_bytes = response.generated_images[0].image.image_bytes
         blob_part = Part.from_bytes(data=image_bytes, mime_type="image/png")
         
         try:
