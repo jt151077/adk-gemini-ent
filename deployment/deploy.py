@@ -51,7 +51,9 @@ remote_app = agent_engines.create(
     description="Agent to provide facts about the year given by the user as well as an image for that fact",
     agent_engine=app,
     requirements=[
-        "google-cloud-aiplatform[adk,agent_engines]"
+        "google-cloud-aiplatform[adk,agent_engines]",
+        "pillow>=11.3.0",
+        "python-dotenv>=1.1.1",
     ],
     extra_packages = [
         "./fact_agent",
