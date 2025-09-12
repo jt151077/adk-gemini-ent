@@ -20,7 +20,17 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 ## Install
 
-1. CD to the root of the project `adk-agentspace`, provide the correct `GOOGLE_CLOUD_PROJECT` in the `.env` file.
+1. CD to the root of the project `adk-agentspace`, provide the correct values in the `.env` file:
+
+```shell
+GOOGLE_GENAI_USE_VERTEXAI=TRUE
+GOOGLE_CLOUD_PROJECT=<YOUR_GCP_PROJECT_ID>
+GOOGLE_CLOUD_LOCATION=<YOUR_GCP_REGION>
+AGENT_ENGINE_NAME='<THE_AGENT_NAME>' ## this will be the name visible in Agent Engine
+AGENT_SPACE_DISPLAY_NAME='<THE_AGENT_NAME>' ## this will be the agent name in Agent Space
+AGENT_SPACE_AGENT_DESCRIPTION='<THE_AGENT_DESCRIPTION>' ## this will be the agent description in Agent Space
+```
+
 2. At the root folder, execute the following commands:
 
 ```shell
@@ -46,20 +56,44 @@ This will start a webserver running on http://127.0.0.1:8000. By pointing your w
 
 ```shell
 uv run fact_agent/test_local.py
-uv run deployment/deploy.py
+uv run deployment/agent_engine/deploy.py
 ```
 
-> When the deploy script is finished, in the Terminal output, note the Resource Name (in the form): `projects/<PROJECT_NUMBER>/locations/us-central1/reasoningEngines/6540449315872047104`
+> When the deploy script is finished, it will update the `.env` file with the new Agent Engine Resource Name (in the form): `AGENT_SPACE_AGENT_NAME=projects/<PROJECT_NUMBER>/locations/us-central1/reasoningEngines/6540449315872047104`
 
 5. Create a new `Agentspace` AI Application in the GCP console:
 
 ![](imgs/img1.png)
 
-6. Under `Configurations` => `Assitant`, add a new Agents item at the bottom of the page. Paste the previously copied `Resource Name` in the `Agent` field. Provide a display name and a short sentence for Instructions. Save and publish when done:
+6. Update the `.env` file with the ID for the newly created AgentSpace application (Note: the ID will displayed as you type the App name in the console):
 
-![](imgs/img2.png)
+```shell
+AGENT_SPACE_APP_NAME=<YOUR_AGENTSPACE_APP_ID>
+```
 
-7. Under the left-hand side panel, click on `Integration`, copy the link to your web app, and open it in a new tab.
 
-8. Click on your new Agent on the left panel, and provide a date:
-![](imgs/img3.png)
+7. You can now deploy your agent hosted in Agent Engine to your latest AgentSpace application, with the following command:
+
+
+```shell
+./deployment/agent_space/deploy.sh
+```
+
+> Note: This will add the `AGENT_SPACE_AGENT_NAME` value to the `.env` file. This will be picked up by default if you execute the `delete.sh` script.
+
+
+8. Under the left-hand side panel, click on `Integration`, copy the link to your web app, and open it in a new tab.
+
+9. In AgentSpace, under Agents => View All Agents, you will be able to see your latest agent:
+
+![](imgs/img6.png)
+
+![](imgs/img7.png)
+
+
+10. You can delete obsolete agents under the Agents menu in AI Application in the console. Otherwise, you combine the `list.sh` and/or `delete.sh` to clean up agents in your AgentSpace
+
+```shell
+./deployment/agent_space/delete.sh
+./deployment/agent_space/list.sh
+```

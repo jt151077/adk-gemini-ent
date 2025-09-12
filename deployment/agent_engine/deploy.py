@@ -16,7 +16,7 @@ import os
 import vertexai
 import logging
 from vertexai import agent_engines
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key, find_dotenv, unset_key
 from fact_agent.agent import root_agent
 from vertexai.preview.reasoning_engines import AdkApp
 
@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 vertexai.init(
     project=os.getenv("GOOGLE_CLOUD_PROJECT"),
     location=os.getenv("GOOGLE_CLOUD_LOCATION"),
-    staging_bucket="gs://" + os.getenv("GOOGLE_CLOUD_PROJECT")+"-"+os.getenv("APP_NAME")+"",
+    staging_bucket="gs://" + os.getenv("GOOGLE_CLOUD_PROJECT")+"-"+os.getenv("AGENT_ENGINE_NAME")+"",
 )
 
 
@@ -47,7 +47,7 @@ logging.debug("deploying agent to agent engine:")
 
 
 remote_app = agent_engines.create(
-    display_name=os.getenv("APP_NAME"),
+    display_name=os.getenv("AGENT_ENGINE_NAME"),
     description="Agent to provide facts about the year given by the user as well as an image for that fact",
     agent_engine=app,
     requirements=[
@@ -60,5 +60,13 @@ remote_app = agent_engines.create(
     ],
 )
 
-logging.info(f"Deployed agent to Vertex AI Agent Engine successfully, resource name: {remote_app.resource_name}")
+env_file_path = ".env" 
+key_to_set = "AGENT_ENGINE_RESOURCE_NAME"
+# clean previous values
+unset_key(env_file_path, key_to_set)
 
+# set new agent resource name
+value_to_set = remote_app.resource_name
+set_key(env_file_path, key_to_set, value_to_set)
+
+logging.info(f"Deployed agent to Vertex AI Agent Engine successfully, resource name: {remote_app.resource_name}")
