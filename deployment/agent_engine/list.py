@@ -17,7 +17,6 @@ import vertexai
 import logging
 from vertexai import agent_engines
 from dotenv import load_dotenv, set_key, find_dotenv, unset_key
-from fact_agent.agent import root_agent
 from vertexai.preview.reasoning_engines import AdkApp
 
 
@@ -36,12 +35,6 @@ vertexai.init(
 
 
 logger.info("Listing app...")
-
-
-app = AdkApp(
-    agent=root_agent,
-    enable_tracing=True
-)
 
 remote_app = agent_engines.list(filter=f'display_name="{os.getenv("AGENT_ENGINE_NAME")}"')
 
