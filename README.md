@@ -1,4 +1,4 @@
-# ad-gemini-ent
+# adk-gemini-ent
 Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 
@@ -6,7 +6,7 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 1. This example is meant to work with `python >= 3.12`
 2. Install the `UV` Python package manager from https://github.com/astral-sh/uv
-3. Check out this repository somewhere where you have a terminal access `git clone git@github.com:jt151077/ad-gemini-ent.git`
+3. Check out this repository somewhere where you have a terminal access `git clone git@github.com:jt151077/adk-gemini-ent.git`
 4. For this example you need a GCP Project, as the artifacts will be deployed in Agent Engine, and the AgentSpace provisioned in AI Applications 
 
 
@@ -20,7 +20,7 @@ Simple example of a custom Agent developed with ADK and published in AgentSpace
 
 ## Install
 
-1. CD to the root of the project `ad-gemini-ent`, provide the correct values in the `.env` file:
+1. CD to the root of the project `adk-gemini-ent`, provide the correct values in the `.env` file:
 
 ```shell
 GOOGLE_GENAI_USE_VERTEXAI=TRUE
