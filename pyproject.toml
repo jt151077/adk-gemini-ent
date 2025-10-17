@@ -5,10 +5,10 @@ description = "ADK Agent which produces a fact from a given year and an image ba
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "google-adk>=1.8.0",
-    "google-cloud-aiplatform[adk,agent-engines]>=1.105.0",
-    "pillow>=11.3.0",
-    "python-dotenv>=1.1.1",
+    "google-adk",
+    "google-cloud-aiplatform[adk,agent-engines]",
+    "pillow",
+    "python-dotenv",
 ]
 
 [tool.setuptools]

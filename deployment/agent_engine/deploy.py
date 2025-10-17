@@ -52,8 +52,8 @@ remote_app = agent_engines.create(
     agent_engine=app,
     requirements=[
         "google-cloud-aiplatform[adk,agent_engines]",
-        "pillow>=11.3.0",
-        "python-dotenv>=1.1.1",
+        "pillow",
+        "python-dotenv",
     ],
     extra_packages = [
         "./fact_agent",

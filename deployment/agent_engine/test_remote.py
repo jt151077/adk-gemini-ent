@@ -46,6 +46,6 @@ for event in ae_app.stream_query(
     session_id=session["id"],
     message="1977",
 ):
-    print(event)
+    logger.info(event)
 
 logging.debug(f"Remote app: {ae_app.display_name}")

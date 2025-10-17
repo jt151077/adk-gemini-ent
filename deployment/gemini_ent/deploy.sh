@@ -1,9 +1,9 @@
 #!/bin/bash
 
 GOOGLE_CLOUD_PROJECT=$(grep '^GOOGLE_CLOUD_PROJECT=' .env | cut -d '=' -f 2-)
-AGENT_SPACE_APP_NAME=$(grep '^AGENT_SPACE_APP_NAME=' .env | cut -d '=' -f 2-)
-AGENT_SPACE_DISPLAY_NAME=$(grep '^AGENT_SPACE_DISPLAY_NAME=' .env | cut -d '=' -f 2-)
-AGENT_SPACE_AGENT_DESCRIPTION=$(grep '^AGENT_SPACE_AGENT_DESCRIPTION=' .env | cut -d '=' -f 2-)
+GEMINI_ENT_APP_NAME=$(grep '^GEMINI_ENT_APP_NAME=' .env | cut -d '=' -f 2-)
+GEMINI_ENT_DISPLAY_NAME=$(grep '^GEMINI_ENT_DISPLAY_NAME=' .env | cut -d '=' -f 2-)
+GEMINI_ENT_AGENT_DESCRIPTION=$(grep '^GEMINI_ENT_AGENT_DESCRIPTION=' .env | cut -d '=' -f 2-)
 AGENT_ENGINE_RESOURCE_NAME=$(grep '^AGENT_ENGINE_RESOURCE_NAME=' .env | cut -d '=' -f 2-)
 
 
@@ -11,14 +11,14 @@ http_response=$(curl -X POST \
 -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 -H "Content-Type: application/json" \
 -H "X-Goog-User-Project: ${GOOGLE_CLOUD_PROJECT}" \
-"https://discoveryengine.googleapis.com/v1alpha/projects/${GOOGLE_CLOUD_PROJECT}/locations/global/collections/default_collection/engines/${AGENT_SPACE_APP_NAME}/assistants/default_assistant/agents" \
+"https://discoveryengine.googleapis.com/v1alpha/projects/${GOOGLE_CLOUD_PROJECT}/locations/global/collections/default_collection/engines/${GEMINI_ENT_APP_NAME}/assistants/default_assistant/agents" \
 -d @- <<EOF
 {
-  "displayName": ${AGENT_SPACE_DISPLAY_NAME},
-  "description": ${AGENT_SPACE_AGENT_DESCRIPTION},
+  "displayName": ${GEMINI_ENT_DISPLAY_NAME},
+  "description": ${GEMINI_ENT_AGENT_DESCRIPTION},
   "adk_agent_definition": {
     "tool_settings": {
-      "tool_description": ${AGENT_SPACE_AGENT_DESCRIPTION}
+      "tool_description": ${GEMINI_ENT_AGENT_DESCRIPTION}
     },
     "provisioned_reasoning_engine": {
       "reasoning_engine": ${AGENT_ENGINE_RESOURCE_NAME}
@@ -29,7 +29,7 @@ EOF
 )
 
 
-KEY_TO_SET="AGENT_SPACE_AGENT_NAME"
+KEY_TO_SET="GEMINI_ENT_AGENT_NAME"
 ENV_FILE=".env"
 
 # This variable should be set before this script runs

@@ -21,7 +21,7 @@ async def main():
         print(event)
     
     
-    agent_context = '{"message":{"role":"user","parts":[{"text":"1977"}]},"events":[{"content":{"role":"user","parts":[{"text":"1977"}]},"author":"AgentSpace_root_agent"},{"content":{"role":"model","parts":[{"functionCall":{"name":"agentspaceak","args":{"question":"1977"},"id":"14076651604820872102"}}]},"author":"AgentSpace_root_agent","id":"14076651604820872102"}]}'
+    agent_context = '{"message":{"role":"user","parts":[{"text":"1977"}]},"events":[{"content":{"role":"user","parts":[{"text":"1977"}]},"author":"GeminiEntreprise_root_agent"},{"content":{"role":"model","parts":[{"functionCall":{"name":"GeminiEntrepriseak","args":{"question":"1977"},"id":"14076651604820872102"}}]},"author":"GeminiEntreprise_root_agent","id":"14076651604820872102"}]}'
     
     for response in app.streaming_agent_run_with_events(agent_context):
         print(response)
